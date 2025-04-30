@@ -1,0 +1,19 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long long t, n, del, sum, a;
+
+int main() {
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+		cin >> n;
+		sum = 0;
+		del = 0;
+		for (int j = 0; j < n; j++) {
+			cin >> a;
+			if (a % 6 == 0 and a > 0) { sum += a; del++; }
+		}
+		cout << del << " " << sum << endl;
+	}
+}

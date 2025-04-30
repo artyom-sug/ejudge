@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string clock_d;
+int h1, h2, m1, m2, hh, mm, tim_af, tim = 60 * 12, tim_bef, t;
+
+int main(){
+	cin >> t;
+	for (int y = 0; y < t; y++) {
+		cin >> clock_d;
+		h1 = clock_d[0] - '0';
+		h2 = clock_d[1] - '0';
+		m1 = clock_d[3] - '0';
+		m2 = clock_d[4] - '0';
+		hh = h1 * 10 + h2;
+		mm = m1 * 10 + m2;
+		tim_af = hh * 60 + mm;
+		if (tim_af > 720) tim_af -= 720;
+		tim_bef = tim - tim_af;
+		mm = tim_bef % 60;
+		hh = tim_bef / 60;
+		if (hh != 0) {
+			h1 = hh / 10;
+			h2 = hh % 10;
+		}
+		else {
+			h1 = 1;
+			h2 = 2;
+		}
+		m1 = mm / 10;
+		m2 = mm % 10;
+		cout << h1 << h2 << ':' << m1 << m2 << endl;
+	}
+}

@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+
+int n, t;
+char m = '!';
+
+int main(){
+	cin >> t;
+	for (int y = 0; y < t; y++) {
+		cin >> n;
+		cout << "Good luck for John and Brus";
+		for (int i = 0; i < n; i++) cout << m;
+		cout << endl;
+	}
+}

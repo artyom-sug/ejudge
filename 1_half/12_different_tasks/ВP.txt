@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+string a, b;
+int cnt = 0, tmp;
+
+int main() {
+	cin >> a >> b;
+	string a1 = a, b1 = b;
+	sort(a1.begin(), a1.end());
+	sort(b1.begin(), b1.end());
+	int s = a.size();
+	if (a1 != b1) {
+		cout << "-1";
+		return 0;
+	}
+	for (int i = 0; i < s; i++) {
+		tmp = 0;
+		for (int j = 0; j < b.size(); j++) {
+			if (a[0] == b[j]) {
+				tmp = j;
+				break;
+			}
+		}
+		for (int j = tmp; j > 0; j--) {
+			swap(b[j], b[j - 1]);
+			cnt++;
+		}
+		a.erase(0, 1);
+		b.erase(0, 1);
+	}
+	cout << cnt;
+}

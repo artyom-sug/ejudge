@@ -1,0 +1,14 @@
+#include <iostream>
+using namespace std;
+
+int m, n, t;
+
+int main(){
+	cin >> t;
+	for (int y = 0; y < t; y++) {
+		m = 1;
+		cin >> n;
+		for (int i = 1; i <= n; i++) m *= i;
+		cout << m << endl;
+	}
+}

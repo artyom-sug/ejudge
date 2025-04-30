@@ -1,0 +1,12 @@
+#include <iostream>
+using namespace std;
+
+int j, b, t;
+
+int main(){
+	cin >> t;
+	for (int y = 0; y < t; y++) {
+		cin >> j >> b;
+		cout << j + b << endl;
+	}
+}

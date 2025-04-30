@@ -1,0 +1,10 @@
+#include <iostream>
+using namespace std;
+
+int a = 0, sum = 0; 
+
+int main() { 
+	while (cin >> a) sum += a; 
+	cout << sum; 
+	return 0; 
+}

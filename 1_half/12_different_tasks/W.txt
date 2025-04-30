@@ -1,0 +1,17 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int t, n;
+
+int main() {
+	cin >> t;
+	for (int j = 0; j < t; j++) {
+		cin >> n;
+		vector <long long> f(n);
+		for (int i = 0; i < n; i++) cin >> f[i];
+		sort(f.begin(), f.end());
+		for (int i = 0; i < n; i++) if (i == n - 1) cout << f[i] << endl; else cout << f[i] << ' ';
+	}
+}

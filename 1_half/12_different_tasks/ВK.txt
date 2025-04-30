@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+int f1[1001] = { 0 }, f2[1001] = { 0 }, f3[1001] = { 0 };
+int n;
+
+void SumLong(int* A, int* B, int* C) {
+	int j = max(A[0], B[0]), sum;
+	bool flag = false;
+	C[0] = j;
+	for (int i = 1; i <= j; i++) {
+		sum = A[i] + B[i];
+		if (flag) {
+			sum += 1;
+			flag = false;
+		}
+		if (sum > 9999) {
+			flag = true;
+			sum -= 10000;
+		}
+		C[i] = sum;
+	}
+	if (flag) {
+		C[0]++;
+		C[j + 1] = 1;
+	}
+}
+
+void TransferLong(int* A, int* B) {
+	for (int i = 0; i <= B[0]; i++) A[i] = B[i];
+}
+
+int main() {
+	f1[0] = 1; f1[1] = 1; f2[0] = 1; f2[1] = 1;
+	cin >> n;
+	if (n == 1 or n == 2) cout << 1;
+	else {
+		for (int i = 2; i < n; i++) {
+			SumLong(f1, f2, f3);
+			TransferLong(f1, f2);
+			TransferLong(f2, f3);
+		}
+	}
+	for (int i = f3[0]; i > 0; i--) {
+		if (f3[i] < 10 and i != f3[0]) cout << "000" << f3[i];
+		else if (f3[i] < 100 and i != f3[0]) cout << "00" << f3[i];
+		else if (f3[i] < 1000 and i != f3[0]) cout << "0" << f3[i];
+		else cout << f3[i];
+	}
+	cout << endl;
+	return 0;
+}

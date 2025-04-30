@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+long long n, t;
+
+long double s(long long n) {
+	long double sum = sqrt(n + 1) - 1;
+	return sum;
+}
+
+int main() {
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+		cin >> n;
+		long long a = 0, b = 0;
+		for (int i = n - 1; i > 0; i--) {
+			long double r = s(i) - (int)s(i);
+			if (r < 1e-9) { a = i; break; }
+		}
+		for (int i = n + 1; i < 1e9; i++) {
+			long double r = s(i) - (int)s(i);
+			if (r < 1e-9) { b = i; break; }
+		}
+		cout << a << " " << b << endl;
+	}
+}

@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int s, res, ind = 0;
+
+int SumFactors(int S) {
+	if (S == 1) return 1;
+	int sum = 1 + S;
+	for (int i = 2; i * i <= S; i++) {
+		if (S % i == 0) {
+			if (i * i == S) sum += i;
+			else sum += i + S / i;
+		}
+	}
+	return sum;
+}
+
+int main() {
+	while (cin >> s) {
+		if (s == 0) return 0;
+		res = -1;
+		for (int i = s; i > 0; i--) {
+			if (SumFactors(i) == s) {
+				res = i;
+				break;
+			}
+		}
+		cout << "Case " << ++ind << ": " << res << endl;
+	}
+}

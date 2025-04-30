@@ -1,0 +1,16 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long long n, a;
+
+int main() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a;
+		int first = a / 100;
+		int last = a % 10;
+		if (first == last) cout << '=' << endl;
+		else cout << max(first, last) << endl;
+	}
+}

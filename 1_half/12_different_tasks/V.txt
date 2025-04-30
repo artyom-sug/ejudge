@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int l, r, n;
+
+int main() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> l >> r;
+		if (l % 4 != 0 and l % 7 != 0) cout << (r / 4 + r / 7 - r / 28) - (l / 4 + l / 7 - l / 28) << endl;
+		else cout << (r / 4 + r / 7 - r / 28) - ((l - 1) / 4 + (l - 1) / 7 - (l - 1) / 28) << endl;
+	}
+}

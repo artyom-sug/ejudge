@@ -1,0 +1,78 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int a[251], b[251], c[252], cnt = 0, num = 0;
+char tmp, stroka1[1001], stroka2[1001];
+
+void ReadLong(char* s, int* A) {
+	int j = A[0], h = 1, k = 0, num = 0, stepen = 1;
+	while (j != 0) {
+		if (j - 1 < 4) {
+			for (int i = j - 1; i >= 0; i--) {
+				num += (s[i] - '0') * stepen;
+				stepen *= 10;
+			}
+			k++;
+			j = 0;
+			A[h++] = num;
+		}
+		else {
+			for (int i = j - 1; i >= j - 4; i--) {
+				num += (s[i] - '0') * stepen;
+				stepen *= 10;
+			}
+			k++;
+			A[h++] = num;
+			num = 0;
+			stepen = 1;
+			j -= 4;
+		}
+	}
+	A[0] = k;
+}
+
+void SumLong(int* A, int* B, int* C) {
+	int j = max(A[0], B[0]), sum;
+	bool flag = false;
+	C[0] = j;
+	for (int i = 1; i <= j; i++) {
+		sum = A[i] + B[i];
+		if (flag) {
+			sum += 1;
+			flag = false;
+		}
+		if (sum > 9999) {
+			flag = true;
+			sum -= 10000;
+		}
+		C[i] = sum;
+	}
+	if (flag) {
+		C[0]++;
+		C[j + 1] = 1;
+	}
+}
+
+int main() {
+	while (cin.get(tmp)) {
+		if (tmp == '\n') break;
+		else  stroka1[cnt++] = tmp;
+	}
+	a[0] = cnt;
+	ReadLong(stroka1, a);
+	cnt = 0;
+	while (cin.get(tmp)) {
+		if (tmp == '\n') break;
+		else  stroka2[cnt++] = tmp;
+	}
+	b[0] = cnt;
+	ReadLong(stroka2, b);
+	SumLong(a, b, c);
+	for (int i = c[0]; i > 0; i--) {
+		if (c[i] < 10 and i != c[0]) cout << "000" << c[i];
+		else if (c[i] < 100 and i != c[0]) cout << "00" << c[i];
+		else if (c[i] < 1000 and i != c[0]) cout << "0" << c[i];
+		else cout << c[i];
+	}
+}

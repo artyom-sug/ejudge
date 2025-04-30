@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int n, r, k = 1;
+
+int main() {
+	while (cin >> r >> n) {
+		if (r == 0 and n == 0) break;
+		if (r <= n) cout << "Case " << k++ << ": " << 0 << endl;
+		else {
+			r -= n;
+			if (r - (26 * n) > 0) cout << "Case " << k++ << ": " << "impossible" << endl;
+			else cout << "Case " << k++ << ": " << ceil(1.0 * r / n) << endl;
+		}
+	}
+}

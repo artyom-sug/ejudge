@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int k, n, t;
+
+int main() {
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+		cin >> k >> n;
+		if (n % k == 0) cout << n / k << ' ' << k << endl;
+		else cout << n / k + 1 << ' ' << n % k << endl;
+	}
+}

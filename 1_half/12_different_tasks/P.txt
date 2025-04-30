@@ -1,0 +1,34 @@
+//
+#include <iostream>
+using namespace std;
+
+int t, n, a[50];
+
+bool Supersequence(int n, int A[50]) {
+	for (int i = 0; i < n - 1; i++) {
+		if (A[i] >= A[i + 1]) return false;
+	}
+	int sums[1001] = { 0 };
+	sums[0] = 1;
+	for (int i = 0; i < n; i++) {
+		for (int j = 1000; j >= 0; j--) {
+			if (sums[j] == 1) if (j + A[i] <= 1000) sums[j + A[i]]++;
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		if (sums[A[i]] > 1) return false;
+	}
+	return true;
+}
+
+int main() {
+	cin >> t;
+	for (int y = 0; y < t; y++) {
+		cin >> n;
+		for (int i = 0; i < n; i++) {
+			cin >> a[i];
+		}
+		if (Supersequence(n, a)) cout << "Yes" << endl;
+		else cout << "No" << endl;
+	}
+}

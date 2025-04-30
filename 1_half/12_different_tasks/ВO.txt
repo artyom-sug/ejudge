@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int t;
+string s, s1, s2;
+
+int main() {
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+		cin >> s;
+		s1 = ""; s2 = "";
+		if (s.size() % 2 == 1) s.erase(s.size() / 2, 1);
+		for (int i = 0; i < s.size() / 2; i++) s1 += s[i];
+		for (int i = s.size() / 2; i < s.size(); i++) s2 += s[i];
+		sort(s1.begin(), s1.end());
+		sort(s2.begin(), s2.end());
+		if (s1 == s2) cout << "YES" << endl;
+		else cout << "NO" << endl;
+	}
+}

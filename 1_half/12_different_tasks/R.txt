@@ -1,0 +1,18 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int n, m;
+
+int main() {
+	while (cin >> n >> m) {
+		int nod = 0, tmp = 0;
+		while (n != 0 and m != 0) {
+			tmp = n % m;
+			if (tmp == 0) { nod = m; n = 0; }
+			else { n = m; m = tmp; }
+		}
+		if (nod == 1) cout << "YES" << endl;
+		else cout << "NO" << endl;
+	}
+}

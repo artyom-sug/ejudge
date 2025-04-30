@@ -1,0 +1,25 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n, t, f[101];
+
+int main() {
+	cin >> t;
+	for (int i = 0; i < t; i++) {
+		cin >> n;
+		int maxim = 0, minim = 1001, ind_min = 0, ind_max = 0;
+		for (int i = 0; i < n; i++) {
+			cin >> f[i];
+		}
+		for (int i = 0; i < n; i++) {
+			if (f[i] > maxim) { maxim = f[i]; ind_max = i; }
+			if (f[i] < minim) { minim = f[i]; ind_min = i; }
+		}
+		swap(f[ind_max], f[ind_min]);
+		for (int i = 0; i < n; i++) {
+			if (i == n - 1) cout << f[i] << endl;
+			else cout << f[i] << ' ';
+		}
+	}
+}

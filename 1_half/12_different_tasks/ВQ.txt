@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+long long a[1001][1001];
+long long minimf[1001], maximf[1001];
+
+int main() {
+	int n, m;
+	long long minim, maxim;
+	cin >> n >> m;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> a[i][j];
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		minim = 1e9;
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] < minim) {
+				minim = a[i][j];
+			}
+		}
+		minimf[i] = minim;
+	}
+	for (int j = 0; j < m; j++) {
+		maxim = 0;
+		for (int i = 0; i < n; i++) {
+			if (a[i][j] > maxim) {
+				maxim = a[i][j];
+			}
+		}
+		maximf[j] = maxim;
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] != minimf[i]) {
+				a[i][j] = 0;
+			}
+		}
+	}
+	for (int j = 0; j < m; j++) {
+		for (int i = 0; i < n; i++) {
+			if (a[i][j] != maximf[j]) {
+				a[i][j] = 0;
+			}
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] != 0) {
+				cout << a[i][j] << endl << i << " " << j;
+				return 0;
+			}
+		}
+	}
+	cout << "0";
+}

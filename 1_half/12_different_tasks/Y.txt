@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int a[641], k, t;
+
+void LongFactor(int* A, int k) {
+	a[0] = 1;
+	a[1] = 1;
+	int res, tmp = 0;
+	for (int j = 2; j <= k; j++) {
+		for (int i = 1; i <= A[0]; i++) {
+			res = A[i] * j + tmp;
+			A[i] = res % 10000;
+			tmp = res / 10000;
+		}
+		while (tmp) {
+			A[++A[0]] = tmp % 10000;
+			tmp /= 10000;
+		}
+	}
+}
+
+int main() {
+	cin >> t;
+	for (int y = 0; y < t; y++) {
+		cin >> k;
+		LongFactor(a, k);
+		for (int i = a[0]; i > 0; i--) {
+			if (a[i] < 10 and i != a[0]) cout << "000" << a[i];
+			else if (a[i] < 100 and i != a[0]) cout << "00" << a[i];
+			else if (a[i] < 1000 and i != a[0]) cout << "0" << a[i];
+			else cout << a[i];
+		}
+		cout << endl;
+	}
+}
