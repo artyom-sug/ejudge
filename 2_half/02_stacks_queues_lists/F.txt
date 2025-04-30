@@ -1,0 +1,131 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+#define uint unsigned int
+
+class arr {
+private:
+	struct node
+	{
+		int val;
+		node* next;
+		node* prev;
+		node(int vl) : val(vl), next(nullptr), prev(nullptr) {}
+	};
+
+	node* head;
+	node* tail;
+	uint size;
+
+	node* get_node(uint ind) const {
+		if (ind >= size) {
+			while (true) {}
+		}
+		node* cur = head;
+		for (uint i = 0; i < ind; i++) {
+			cur = cur->next;
+		}
+		return cur;
+	}
+public:
+	arr() : head(nullptr), tail(nullptr), size(0) {}
+
+	~arr() {
+		clear();
+	}
+
+	void clear() {
+		while (head) {
+			node* tmp = head;
+			head = head->next;
+			delete tmp;
+		}
+		head = tail = nullptr;
+		size = 0;
+	}
+
+	void push_back(int val) {
+		node* nnode = new node(val);
+		if (tail) {
+			tail->next = nnode;
+			nnode->prev = tail;
+			tail = nnode;
+		}
+		else {
+			head = tail = nnode;
+		}
+		size++;
+	}
+
+	void push_front(int val) {
+		node* nnode = new node(val);
+		if (head) {
+			head->prev = nnode;
+			nnode->next = head;
+			head = nnode;
+		}
+		else {
+			head = tail = nnode;
+		}
+		size++;
+	}
+
+	int  pop_back() {
+		if (!tail) return -1;
+		node* tmp = tail;
+		int val = tmp->val;
+		if (tail->prev) {
+			tail = tail->prev;
+			tail->next = nullptr;
+		}
+		else {
+			head = tail = nullptr;
+		}
+		delete tmp;
+		size--;
+		return val;
+	}
+
+	int pop_front() {
+		if (!head) return -1;
+		node* tmp = head;
+		int val = tmp->val;
+		if (head->next) {
+			head = head->next;
+			head->prev = nullptr;
+		}
+		else {
+			head = tail = nullptr;
+		}
+		delete tmp;
+		size--;
+		return val;
+	}
+
+	uint get_size() const {
+		return size;
+	}
+};
+
+int main() {
+	arr shelf;
+	int book;
+	char num;
+	while (scanf(" %c", &num) != EOF) {
+		if (num == '1' or num == '2') {
+			scanf("%d", &book);
+			if (num == '1') shelf.push_front(book);
+			else shelf.push_back(book);
+		}
+		else {
+			if (num == '3') {
+				book = shelf.pop_front();
+				printf("%d\n", book);
+			}
+			else {
+				book = shelf.pop_back();
+				printf("%d\n", book);
+			}
+		}
+	}
+	return 0;
+}

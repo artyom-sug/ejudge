@@ -1,0 +1,39 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+
+struct point {
+    double x, y;
+}A, B, C, D;
+
+int orient(point a, point b, point c) {
+    double val = (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
+    if (abs(val) < 1e-9) return 0;
+    return (val > 0) ? 1 : -1;
+}
+
+bool inter(point a, point b, point c, point d) {
+    int o1 = orient(a, b, c), o2 = orient(a, b, d), o3 = orient(c, d, a), o4 = orient(c, d, b);
+    if (o1 != o2 and o3 != o4) return true;
+    if (o1 == 0 and o2 == 0) {
+        if ((min(a.x, b.x) <= max(c.x, d.x) and min(c.x, d.x) <= max(a.x, b.x)
+            and min(a.y, b.y) <= max(c.y, d.y) and min(c.y, d.y) <= max(a.y, b.y))) return true;
+    }
+    return false;
+}
+
+double dist(point p, point a, point b) {
+    double dx = b.x - a.x, dy = b.y - a.y;
+    double t = ((p.x - a.x) * dx + (p.y - a.y) * dy) / (dx * dx + dy * dy);
+    t = max(0.0, min(t, 1.0));
+    point proj = { a.x + t * dx, a.y + t * dy };
+    return sqrt((p.x - proj.x) * (p.x - proj.x) + (p.y - proj.y) * (p.y - proj.y));
+}
+
+int main() {
+    cin >> A.x >> A.y >> B.x >> B.y >> C.x >> C.y >> D.x >> D.y;
+    double res = inter(A, B, C, D) ? 0 : min({ dist(A,C,D), dist(B,C,D), dist(C,A,B), dist(D,A,B) });
+    cout << fixed << setprecision(9) << res << endl;
+}

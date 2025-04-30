@@ -1,0 +1,20 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+stack<char> s;
+char c;
+int cnt = 0;
+
+int main() {
+    while (true) {
+        cin.get(c);
+        if (c == '\n') break;
+        else {
+            if (c == ')' and s.empty()) cnt++;
+            else if (c == ')') s.pop();
+            else s.push(c);
+        }
+    }
+    cout << cnt + s.size() << endl;
+}

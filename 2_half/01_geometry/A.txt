@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+long long r, cells[1001][1001], cnt = 0;
+
+int main() {
+	cin >> r;
+	for (int i = 0; i < r + 1; i++) {
+		for (int j = 0; j < r + 1; j++) {
+			cells[i][j] = i * i + j * j;
+		}
+	}
+	for (int i = 1; i < r + 1; i++) {
+		for (int j = 1; j < r + 1; j++) {
+			if (cells[i - 1][j - 1] <= r * r and cells[i][j - 1] <= r * r and cells[i - 1][j] <= r * r and cells[i][j] <= r * r) cnt++;
+		}
+	}
+	cout << cnt * 4 << endl;
+}

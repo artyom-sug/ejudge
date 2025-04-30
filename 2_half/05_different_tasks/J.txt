@@ -1,0 +1,14 @@
+#include <iostream> 
+using namespace std;
+
+int a, b, c;
+
+int main() {
+	cin >> a >> b >> c;
+	int cnt_a = c / a, cnt_b = 0;
+	while (cnt_a > 0 and c - a*(cnt_a - 1) - b* cnt_b >= b) { 
+		cnt_a--;
+		cnt_b++;
+	}
+	cout << a * cnt_a + b * cnt_b << endl;
+}

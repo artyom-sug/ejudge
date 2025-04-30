@@ -1,0 +1,23 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+stack<int> s;
+int n, a, mx = 0;
+
+int main() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a;
+		if (a > mx or s.empty()) {
+			for (int j = mx; j < a - 1; j++) s.push(j + 1);
+			mx = a;
+		}
+		else {
+			if (s.top() == a) s.pop();
+			else { cout << "Cheater" << endl; return 0; }
+		}
+	}
+	if (mx == a or s.empty()) { cout << "Not a proof" << endl; return 0; }
+	else { cout << "Cheater" << endl; return 0; }
+}

@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+string way, a, b;
+bool fward = false, bward = false;
+
+int main() {
+    cin >> way >> a >> b;
+    if (a.size() + b.size() > way.size()) {
+        cout << "fantasy\n";
+        return 0;
+    }
+    int pos_a = way.find(a);
+    if (pos_a != string::npos) {
+        int pos_b = way.find(b, pos_a + a.size());
+        fward = (pos_b != string::npos);
+    }
+    string rway = way;
+    reverse(rway.begin(), rway.end());
+    pos_a = rway.find(a);
+    if (pos_a != string::npos) {
+        int pos_b = rway.find(b, pos_a + a.size());
+        bward = (pos_b != string::npos);
+    }
+    if (fward and bward) cout << "both\n";
+    else if (fward or bward) {
+        if (fward) cout << "forward\n";
+        else cout << "backward\n";
+    }
+    else cout << "fantasy\n";
+}

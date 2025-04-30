@@ -1,0 +1,21 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+#define y0 y_0
+#define y1 y_1
+
+int x1, x2, x3, y1, y2, y3;
+double len, s, proj, x0, y0;
+
+int main() {
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+    len = sqrt((x2 - x3) * (x2 - x3) + (y2 - y3) * (y2 - y3));
+    proj = ((x1 - x2) * (x3 - x2) + (y1 - y2) * (y3 - y2)) / (len * len);
+    proj = max(0.0, min(proj, 1.0));
+    x0 = x2 + proj * (x3 - x2);
+    y0 = y2 + proj * (y3 - y2);
+    s = sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
+    cout << fixed << setprecision(4) << s << endl;
+    return 0;
+}

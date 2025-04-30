@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+struct point {
+    int x, y;
+}a[100000];
+
+int n, s1, s2, s = 0, sign;
+bool d, d1;
+
+int f(int a) {
+    if (a > 0) return 1;
+    if (a < 0) return -1;
+    return 0;
+}
+
+int main() {
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i].x >> a[i].y;
+    int i = 0;
+    while (i < n and s == 0) {
+        s1 = a[i].x * a[(i + 1) % n].y + a[(i + 1) % n].x * a[(i + 2) % n].y + a[(i + 2) % n].x * a[i].y;
+        s2 = a[i].y * a[(i + 1) % n].x + a[(i + 1) % n].y * a[(i + 2) % n].x + a[(i + 2) % n].y * a[i].x;
+        s = f(s1 - s2);
+        i++;
+    }
+    while (i < n) {
+        s1 = a[i].x * a[(i + 1) % n].y + a[(i + 1) % n].x * a[(i + 2) % n].y + a[(i + 2) % n].x * a[i].y;
+        s2 = a[i].y * a[(i + 1) % n].x + a[(i + 1) % n].y * a[(i + 2) % n].x + a[(i + 2) % n].y * a[i].x;
+        sign = f(s1 - s2);
+        if (sign != s and sign != 0) { cout << "NO" << endl; return 0; }
+        i++;
+    }
+    cout << "YES" << endl;
+    return 0;
+}

@@ -1,0 +1,19 @@
+#include <fstream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int n, m;
+
+int main() {
+	ifstream in("merge.dat");
+	ofstream out("merge.sol");
+	vector<int> res(200000);
+	in >> n;
+	for (int i = 0; i < n; i++) in >> res[i];
+	in >> m;
+	for (int i = n; i < n + m; i++) in >> res[i];
+	res.resize(n + m);
+	sort(res.rbegin(), res.rend());
+	for (int i = 0; i < n + m; i++) out << res[i] << endl;
+}

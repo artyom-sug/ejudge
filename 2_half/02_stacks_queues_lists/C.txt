@@ -1,0 +1,77 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <stack>	
+
+using namespace std;
+#define y1 y_1
+
+struct pos {
+	int weight, px, py;
+} board[101][101];
+
+struct point {
+	int x, y;
+};
+
+int x1, x2, y1, y2, m, n, p, q;
+vector<point> dir;
+
+bool InBoard(int m, int n, int x, int y) {
+	return x >= 0 and x < m and y >= 0 and y < n;
+}
+
+int BFS(int m, int n, int x1, int y1, int x2, int y2) {
+	for (int i = 0; i < m; ++i) {
+		for (int j = 0; j < n; ++j) {
+			board[i][j] = { -1, -1, -1 };
+		}
+	}
+	board[x1][y1].weight = 0;
+	point s1 = { x1, y1 };
+	queue<point> que;
+	que.push(s1);
+	while (!que.empty()) {
+		int x = que.front().x, y = que.front().y;
+		que.pop();
+		for (auto d : dir) {
+			int bx = x + d.x, by = y + d.y;
+			if (InBoard(m, n, bx, by) and (board[bx][by].weight == -1 or board[x][y].weight + 1 < board[bx][by].weight)) {
+				board[bx][by].weight = board[x][y].weight + 1;
+				board[bx][by].px = x;
+				board[bx][by].py = y;
+				point tmp = { bx,by };
+				que.push(tmp);
+				if (bx == x2 and by == y2) return board[bx][by].weight;
+			}
+		}
+	}
+	return -1;
+}
+
+int main() {
+	cin >> m >> n >> p >> q >> x1 >> y1 >> x2 >> y2;
+	x1--; x2--; y1--; y2--;
+	dir = { {p, q}, {p, -q}, {-p, q}, {-p, -q}, {q, p}, {q, -p}, {-q, p}, {-q, -p} };
+	int res = BFS(m, n, x1, y1, x2, y2);
+	if (res == -1) { cout << "-1" << endl; return 0; }
+	else {
+		cout << res << endl;
+		stack<point> stk;
+		int x = x2, y = y2;
+		while (board[x][y].px != -1 and board[x][y].py != -1) {
+			stk.push({ x + 1, y + 1 });
+			int tmpx = x, tmpy = y;
+			x = board[tmpx][tmpy].px;
+			y = board[tmpx][tmpy].py;
+		}
+		stk.push({ x1 + 1, y1 + 1 });
+		while (!stk.empty()) {
+			cout << stk.top().x << ' ' << stk.top().y << endl;
+			stk.pop();
+		}
+	}
+	return 0;
+}
+
+

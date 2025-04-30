@@ -1,0 +1,27 @@
+#include <fstream>
+//#include <iostream>
+#include <vector>
+using namespace std;
+
+int n, m, a[1000][1000];
+
+int main() {
+	ifstream input("rect.dat");
+	ofstream output("rect.sol");
+	input >> n >> m;
+	//cin >> n >> m;
+	for (int i = 0; i < n; i++)
+		for (int j = 0; j < m; j++)
+			input >> a[i][j];
+			//cin >> a[i][j];
+	int cnt = 0;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			if (a[i][j] == 1 and (i == 0 ? 0 : a[i - 1][j]) + (j == 0 ? 0 : a[i][j - 1]) == 0) {
+				cnt++;
+			}
+		}
+	}
+	output << cnt << endl;
+	//cout << cnt;
+}

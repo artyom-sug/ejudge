@@ -1,0 +1,20 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+#include <iostream>
+#include <string>
+using namespace std;
+using ullong = unsigned long long;
+
+int t;
+
+int main() {
+	cin >> t;
+	while (t--) {
+		ullong l, r;
+		scanf("%llu %llu", &l, &r);
+		if (l % 2 == 1) l--;
+		if (r % 2 == 1) r++;
+		if (((l-r)/2)%2==1) printf("Odd\n");
+		else printf("Even\n");
+	}
+}

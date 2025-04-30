@@ -1,0 +1,18 @@
+#include <iostream> 
+using namespace std;
+
+long long n;
+
+int main() {
+	cin >> n;
+	int res = 0;
+	if (n % 5 == 1) {
+		res += 3;
+		n -= 6;
+	}
+	if (n % 5 == 3) {
+		res += 4;
+		n -= 8;
+	}
+	cout << res + n / 5 + (n % 5) / 2 << endl;
+}

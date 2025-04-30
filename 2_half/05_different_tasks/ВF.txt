@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+string s, res = "";
+int k;
+
+int main() {
+	cin >> s >> k;
+	if (k >= s.size()) k = s.size() - 1;
+	int n = s.size() - k;
+	int l = 0, r = k, ind = -1;
+	char mn = 58;
+	for (int i = 0; i < n; i++) {
+		for (int j = l; j <= r; j++) {
+			if (i == 0) {
+				if (s[j] < mn and s[j] != '0') {
+					ind = j;
+					mn = s[j];
+				}
+			}
+			else {
+				if (s[j] < mn) {
+					ind = j;
+					mn = s[j];
+				}
+			}
+		}
+		l = ind + 1;
+		r++;
+		ind = -1;
+		res += mn;
+		mn = 58;
+	}
+	cout << res << endl;
+}

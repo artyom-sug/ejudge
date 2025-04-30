@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long long t[2097153], sum = 0;
+int start;
+int n, a[100000];
+
+void update(int x, int val) {
+	x += start;
+	t[x] += val;
+	while (x / 2 > 0) {
+		x >>= 1;
+		t[x] = t[2 * x] + t[2 * x + 1];
+	}
+	return;
+}
+
+long long get_sum(int l, int r) {
+	l += start;
+	r += start;
+	long long sum = 0;
+	while (l <= r) {
+		if (l % 2) {
+			sum += t[l];
+			l++;
+		}
+		if (r % 2 == 0) {
+			sum += t[r];
+			r--;
+		}
+		l /= 2;
+		r /= 2;
+	}
+	return sum;
+}
+
+int main() {
+	cin >> n;
+	int mx = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+		mx = mx < a[i] ? a[i] : mx;
+	}
+	mx++;
+	start = 1;
+	while (start < mx) start <<= 1;
+	for (int i = 0; i < n; i++) {
+		sum += get_sum(0, a[i] - 1);
+		update(a[i], a[i]);
+	}
+	cout << sum << endl;
+}

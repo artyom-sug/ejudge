@@ -1,0 +1,28 @@
+#define _USE_MATH_DEFINES
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+int x, y;
+double tmp, res;
+
+int main() {
+	cin >> x >> y;
+	if (x == 0) {
+		if (y > 0) res = M_PI / 2;
+		else res = M_PI * 3 / 2;
+	}
+	else {
+		if (x > 0) {
+			if (y < 0) res = 2 * M_PI - atan(1.0 * (-y) / x);
+			else res = atan(1.0 * y / x);
+		}
+		else {
+			if (y < 0) res = M_PI + atan(1.0 * (-y) / (-x));
+			else res = M_PI - atan(1.0 * y / (-x));
+		}
+	}
+	res = round(res * 1e6) / 1e6;
+	cout << fixed << setprecision(6) << res << endl;
+}

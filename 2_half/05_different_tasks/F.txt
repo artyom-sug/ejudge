@@ -1,0 +1,22 @@
+#include <fstream> 
+using namespace std;
+
+int n, a[1001];
+
+int main() {
+	ifstream cin("numb.dat");
+	ofstream cout("numb.sol");
+	cin >> n;
+	for (int i = 0, tmp; i < n; i++) {
+		cin >> tmp;
+		a[tmp]++;
+	}
+	int mx = 0, cnt = 0;
+	for (int i = 0; i < 1001; i++) {
+		if (cnt < a[i]) {
+			cnt = a[i];
+			mx = i;
+		}
+	}
+	cout << mx << endl;
+}

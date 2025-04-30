@@ -1,0 +1,20 @@
+#include <fstream> 
+#include <algorithm>
+using namespace std;
+
+int n, a[50];
+
+int main() {
+	ifstream cin("sum.dat");
+	ofstream cout("sum.sol");
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> a[i];
+	sort(a, a + n);
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+		if (a[i] > sum + 1) break;
+		else sum += a[i];
+	}
+	cout << sum + 1 << endl;
+}

@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+#define y1 y_1
+
+struct point {
+    int x, y;
+}a[100000];
+
+
+int n, x1, x2, x3, y1, y2, y3, res;
+
+int main() {
+    cin >> n;
+    for (int i = 0; i < n; i++) cin >> a[i].x >> a[i].y;
+    cin >> x3 >> y3;
+    for (int i = 0; i < n; i++) {
+        x1 = a[i].x;
+        y1 = a[i].y;
+        x2 = a[(i + 1) % n].x;
+        y2 = a[(i + 1) % n].y;
+        res = (x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1);
+        if (res == 0) {
+            if (min(x1, x2) <= x3 and x3 <= max(x1, x2) and min(y1, y2) <= y3 and y3 <= max(y1, y2)) {
+                cout << "ON BORDER" << endl; return 0;
+            }
+        }
+        else if (res > 0) { cout << "OUTSIDE" << endl; return 0; }
+    }
+    cout << "INSIDE" << endl;
+    return 0;
+}

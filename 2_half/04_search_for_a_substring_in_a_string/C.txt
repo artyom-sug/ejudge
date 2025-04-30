@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+string a, b;
+
+vector<int> KMP(string& s) {
+	int len = s.size();
+	vector<int> res(len);
+	for (size_t i = 1, j; i < len; i++) {
+		j = res[i - 1];
+		while (j > 0 and s[i] != s[j]) 
+			j = res[j - 1];
+		if (s[i] == s[j]) j++;
+		res[i] = j;
+	}
+	return res;
+}	
+
+vector<int> find(string& a, string& b) {
+	vector<int> pi = KMP(b);
+	vector<int> pos;
+	for (size_t i = 0, j = 0; i < a.size(); i++) {
+		while (j > 0 and a[i] != b[j]) 
+			j = pi[j - 1];
+		if (a[i] == b[j]) j++;
+		if (j == b.size()) {
+			pos.push_back(i - j + 2);
+			j = pi[j - 1];
+		}
+	}
+	return pos;
+}
+
+int main() {
+	cin >> a >> b;
+	vector<int> res = find(a, b);
+	cout << res.size() << endl;
+	for (auto i : res) {
+		cout << i << ' ';
+	}
+}
+
+//алгоритм кнута-морриса-пратта (кмп)

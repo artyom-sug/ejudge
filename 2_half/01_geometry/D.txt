@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+#define y1 y_1
+
+int x1, x2, x3, x4, y1, y2, y3, y4, ab, bc, cd, da, ac, bd;
+
+int main() {
+	cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+	ab = (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
+	bc = (x3 - x2) * (x3 - x2) + (y3 - y2) * (y3 - y2);
+	cd = (x4 - x3) * (x4 - x3) + (y4 - y3) * (y4 - y3);
+	da = (x1 - x4) * (x1 - x4) + (y1 - y4) * (y1 - y4);
+	ac = (x3 - x1) * (x3 - x1) + (y3 - y1) * (y3 - y1);
+	bd = (x4 - x2) * (x4 - x2) + (y4 - y2) * (y4 - y2);
+	if (ab == bc and bc == cd and cd == da and da == ab) {
+		if (ac == bd) { cout << 4 << endl; return 0; }
+		else { cout << 2 << endl; return 0; }
+	}
+	else if (ab == cd and bc == da) {
+		if (ac == bd) { cout << 2 << endl; return 0; }
+		else { cout << 0 << endl; return 0; }
+	}
+	else {
+		if ((ab == cd or bc == da) and ac == bd) { cout << 1 << endl; return 0; }
+		else if ((ab == da and bc == cd) or (ab == bc and cd == da)) { cout << 1 << endl; return 0; }
+		else { cout << 0 << endl; return 0; }
+	}
+}
