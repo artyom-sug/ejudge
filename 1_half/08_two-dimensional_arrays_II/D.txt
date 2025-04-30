@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+long long a[101][101];
+string b[101];
+
+int main()
+{
+	int n, m, minim, k = 0, ysl;
+	string mesto;
+	char bilet;
+	cin >> n >> m;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		cin >> b[i];
+	}
+	minim = a[0][0];
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			if (a[i][j] < minim)
+			{
+				minim = a[i][j];
+			}
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			mesto = b[i];
+			bilet = mesto[j];
+			ysl = bilet - '0';
+			if (a[i][j] == minim and ysl == 0)
+			{
+				k++;
+			}
+		}
+	}
+	cout << k;
+	return 0;
+}

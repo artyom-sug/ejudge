@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    long long x,y,d,a;
+    cin>>x>>y;
+    d=0;
+    while (x>0)
+    {
+        a=x%10;
+        x=(x-a)/10;
+        d+=a;
+    }
+    if (y%d==0)
+    {
+        cout<<"YES";
+    }
+    else
+    {
+        cout<<"NO";
+    }
+}

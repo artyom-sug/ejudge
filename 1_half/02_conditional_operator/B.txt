@@ -1,0 +1,21 @@
+#include <cmath>
+#include <iostream>
+using namespace std;
+int main ()
+{
+    long a,b,c;
+    cin>>a>>b>>c;
+    if (a<0 or b<0 or c<0)
+    {
+        cout<<"MINUS";
+    }
+    else if (a==0 or b==0 or c==0)
+    {
+        cout<<"NULL";
+    }
+    else
+    {
+        cout<<"PLUS";
+    }
+    return 0;
+}

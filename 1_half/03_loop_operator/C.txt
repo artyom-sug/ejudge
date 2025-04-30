@@ -1,0 +1,27 @@
+#include <iostream>
+#include <cmath>
+#include <vector>
+using namespace std;
+int main()
+{
+	int n;
+	long long m, k, a, r, y;
+	y = 0;
+	cin >> n >> m >> k;
+	vector<int> f;
+	for (int i{ 0 }; i < n; i++)
+	{
+		cin >> a;
+		if (a % m == k)
+		{
+			f.push_back(a);
+		}
+	}
+	r = end(f) - begin(f);
+	for (int t{0}; t < r; t++)
+	{
+		cout << f[t] << endl;
+		y += f[t];
+	}
+	cout << r << endl << y;
+}

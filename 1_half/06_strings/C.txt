@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+unsigned long long mod, res = 0, stp = 1;
+int osn;
+string num;
+
+int syst(char y) {
+	if (y == 'A') return 10;
+	else if (y == 'B') return 11;
+	else if (y == 'C') return 12;
+	else if (y == 'D') return 13;
+	else if (y == 'E') return 14;
+	else if (y == 'F') return 15;
+	else return y - '0';
+}
+
+int main() {
+	cin >> osn >> num >> mod;
+	for (int i = 0; i < num.size(); i++) {
+		res += ((syst(num[num.size() - i - 1]) % mod) * (stp) % mod) % mod;
+		stp *= osn;
+		stp = stp % mod;
+	}
+	cout << res % mod;
+}

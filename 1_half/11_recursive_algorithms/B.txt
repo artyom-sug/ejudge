@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int n, k;
+char a[243][243], simple[3][3];
+
+void Fractal(int n, int k, int begx, int begy, int size) {
+    if (k == 1) {
+        for (int i = begx; i < begx + size; i++) {
+            for (int j = begy; j < begy + size; j++) {
+                a[i][j] = simple[i - begx][j - begy];
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (simple[i][j] == '.') Fractal(n, k - 1, begx + i * (size / n), begy + j * (size / n), size / n);
+                
+            }
+        }
+    }
+}
+
+int main() {
+    cin >> n >> k;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> simple[i][j];
+        }
+    }
+    int size = pow(n, k);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            a[i][j] = '*';
+        }
+    }
+    Fractal(n, k, 0, 0, size);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            cout << a[i][j];
+        }
+        cout << endl;
+    }
+}

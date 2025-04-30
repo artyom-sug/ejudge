@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main()
+{
+	vector<int> f, new_f;
+	int n, k, posled;
+	cin >> n;
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> k;
+		f.push_back(k);
+		posled = k;
+		cout << k << " ";
+	}
+	cout << endl;
+	new_f.push_back(posled);
+	for (int i = 1; i < n; i++)
+	{
+		new_f.push_back(f[i-1]);
+	}
+	for (int i = 1; i <= (new_f.end() - new_f.begin()); i++)
+	{
+		cout << new_f[i-1] << " ";
+	}
+	return 0;
+}

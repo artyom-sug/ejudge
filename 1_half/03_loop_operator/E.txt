@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	unsigned long long a, n, m, step, sum, ost;
+	step = 1;
+	sum = 1;
+	cin >> a >> n >> m;
+	for (long long i = 1; i <= n; i++)
+	{
+		step = (step * a) % m;
+		sum = (sum + step * i) % m;
+	}
+	ost = sum % m;
+	cout << ost;
+
+	return 0;
+}
