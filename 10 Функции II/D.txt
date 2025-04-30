@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int a[1001], j = 0, num = 0, h = 0;
+char tmp, s[1001];
+
+void ReadLong(char* s, int* A, int j) {
+	while (j != 0) {
+		if (j - 1 < 4) {
+			for (int i = j - 1; i >= 0; i--) {
+				num += (s[i] - '0') * pow(10, j - 1 - i);
+			}
+			j = 0;
+			a[h++] = num;
+			num = 0;
+		}
+		else {
+			for (int i = j - 1; i >= j - 4; i--) { 
+				num += (s[i] - '0') * pow(10, j - 1 - i);
+			}
+			a[h++] = num;
+			num = 0;
+			j -= 4;
+		}
+	}
+}
+
+
+int main() {
+	while (cin.get(tmp)) {
+		if (tmp == '\n') break;
+		else  s[j++] = tmp;
+	}
+	ReadLong(s, a, j);
+	cout << h << endl;
+	for (int i = 0; i < h; i++) {
+		cout << a[i] << endl;
+	}
+}

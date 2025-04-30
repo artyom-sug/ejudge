@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int* StringXOR(string S, string K) {
+	int ind = 0;
+	int s_s = S.size(), s_k = K.size();
+	int* kod = new int[s_s];
+	for (int i = 0; i < s_s; i++) {
+		if (ind >= s_k) { ind = 0; }
+		ind++;
+		kod[i] = S[i] xor K[i%s_k];
+	}
+	return kod;
+}
+
+int main() {
+	string stroka, kluch;
+	cin >> stroka >> kluch;
+	int* kodi = StringXOR(stroka, kluch);
+	for (int i = 0; i < stroka.size(); i++) { cout << kodi[i] << " "; }
+}

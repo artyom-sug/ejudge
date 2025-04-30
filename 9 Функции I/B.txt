@@ -1,0 +1,31 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+int minf(int a, int b)
+{
+	if (a <= b) return a;
+	else return b;
+}
+
+int maxf(int a, int b)
+{
+	if (a >= b) return a;
+	else return b;
+}
+
+void MinMax(int a, int b, int c, int d, int& maxv, int& minv)
+{
+	minv = minf(minf(a, b), minf(c, d));
+	maxv = maxf(maxf(a, b), maxf(c, d));
+}
+
+int main()
+{
+	int a, b, c, d, minv, maxv;
+	cin >> a >> b >> c >> d;
+	MinMax(a, b, c, d, maxv, minv);
+	cout << minv << " " << maxv;
+	return 0;
+}

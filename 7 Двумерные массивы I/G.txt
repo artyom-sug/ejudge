@@ -1,0 +1,47 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+long long a[101][101];;
+
+int main()
+{
+	int n, m, chet;
+	long long minim;
+	chet = 0;
+	cin >> n >> m;
+	vector<long long> minima;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			cin >> a[i][j];
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		minim = a[i][0];
+		for (int j = 0; j < m; j++)
+		{
+			if (a[i][j] > minim)
+			{
+				minim = a[i][j];
+			}
+		}
+		minima.push_back(minim);
+	}
+	sort(minima.begin(), minima.end());
+	minim = minima[0];
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			if (a[i][j] == minim)
+			{
+				chet++;
+			}
+		}
+	}
+	cout << minim << " " << chet;
+}

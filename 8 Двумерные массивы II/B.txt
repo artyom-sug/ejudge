@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+long long a[101][101];
+
+int main()
+{
+	int n, m, chisl = 1, ind_i1 = 0, ind_j1 = 0, ind_i = 0, ind_j = 0;
+	cin >> n >> m;
+	a[0][m - 1] = 1;
+	ind_j = m - 1;
+	ind_i = 1;
+	chisl = 2;
+	while (ind_i < n)
+	{
+		ind_i1 = ind_i;
+		ind_j1 = ind_j;
+		while (ind_i1 >= 0 and ind_j1 >= 0)
+		{
+			a[ind_i1][ind_j1] = chisl;
+			ind_i1--;
+			ind_j1--;
+			chisl++;
+		}
+		ind_i++;
+	}
+	ind_i = n - 1;
+	ind_j--;
+	while (ind_j >= 0)
+	{
+		ind_i1 = ind_i;
+		ind_j1 = ind_j;
+		while (ind_i1 >= 0 and ind_j1 >= 0)
+		{
+			a[ind_i1][ind_j1] = chisl;
+			ind_i1--;
+			ind_j1--;
+			chisl++;
+		}
+		ind_j--;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			cout << a[i][j] << " ";
+		}
+		cout << endl;
+	}
+}

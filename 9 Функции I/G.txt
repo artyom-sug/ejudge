@@ -1,0 +1,19 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int n;
+
+long double factor(int n) {
+	long double res = 1, del = 0;
+	for (int i = 1; i <= n - 3; i+=2) {
+		del+=2;
+		res *= i / del;
+	}
+	return res;
+}
+
+int main() {
+	cin >> n;
+	cout << fixed << setprecision(4) << factor(n);
+}

@@ -1,0 +1,15 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+
+int main () {
+    double a,b;
+    double kyb,kva,mod;
+    cin>>a>>b;
+    kyb=(pow(a,3)+pow(b,3))/2;
+    kva=(pow(a,2)+pow(b,2))/2;
+    mod=(abs(a)+abs(b))/2;
+    cout<<fixed<<setprecision(3)<<kyb<<" "<<kva<<" "<<mod;
+    return 0;
+}

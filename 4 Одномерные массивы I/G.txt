@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	vector<int> f, new_f, sorted;
+	long long n, k, minim, maxim, ind_min, ind_max;
+	cin >> n;
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> k;
+		f.push_back(k);
+		sorted.push_back(k);
+	}
+	sort(begin(sorted), end(sorted));
+	minim = sorted[0];
+	maxim = sorted[n - 1];
+	for (int i = 0; i < n; i++)
+	{
+		if (f[i] == maxim)
+		{
+			ind_max = i;
+		}
+		if (f[i] == minim)
+		{
+			ind_min = i;
+		}
+	}
+	if (ind_min < ind_max)
+	{
+		for (int i = 0; i <= ind_min; i++)
+		{
+			new_f.push_back(f[i]);
+		}
+		for (int i = ind_max - 1; i > ind_min; i--)
+		{
+			new_f.push_back(f[i]);
+		}
+		for (int i = ind_max; i < n; i++)
+		{
+			new_f.push_back(f[i]);
+		}
+	}
+	else
+	{
+		for (int i = 0; i <= ind_max; i++)
+		{
+			new_f.push_back(f[i]);
+		}
+		for (int i = ind_min - 1; i > ind_max; i--)
+		{
+			new_f.push_back(f[i]);
+		}
+		for (int i = ind_min; i < n; i++)
+		{
+			new_f.push_back(f[i]);
+		}
+	}
+	for (int i = 0; i < n; i++)
+	{
+		cout << new_f[i] << " ";
+	}
+	return 0;
+}

@@ -1,0 +1,31 @@
+#include <iostream>
+using namespace std;
+
+int fib[46], n, k, t;
+
+char fibo(int n, int k, int* arr) {
+	if (n == 1) return 'a';
+	else if (n == 2) return 'b';
+	else {
+		if (k > arr[n - 2]) {
+			k -= arr[n - 2];
+			return fibo(n - 1, k, arr);
+		}
+		else {
+			return fibo(n - 2, k, arr);
+		}
+	}
+}
+
+int main() {
+	cin >> t;
+	fib[0] = 0;
+	fib[1] = 1;
+	for (int i = 2; i < 46; i++) {
+		fib[i] = fib[i - 2] + fib[i - 1];
+	}
+	for (int y = 0; y < t; y++) {
+		cin >> n >> k;
+		cout << fibo(n + 1, k, fib) << endl;
+	}
+}

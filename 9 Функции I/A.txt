@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+long double f(long double x)
+{
+	long double res;
+	res = sin(x) + sqrt(log(3 * x) / log(4)) + ceil(3 * exp(x));
+	return res;
+}
+
+int main()
+{
+	long double x;
+	while (cin >> x)
+	{
+		cout << fixed << setprecision(6) << f(x) << endl;
+	}
+}
