@@ -1,0 +1,73 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+struct query {
+	int q, l, r;
+};
+
+//start1, t1 - массив
+//start2, t2 - команды
+
+const int MOD = 1e9 + 7;
+int start1, start2, t1[262144], t2[262144];
+int n, m;
+int q, l, r;
+int a[100000];
+
+void change(int* t, int start, int l, int r, int x) {
+	l += start;
+	r += start;
+	while (l <= r) {
+		if (l % 2) {
+			t[l] = (t[l] + x) % MOD;
+			l++;
+		}
+		if (r % 2 == 0) {
+			t[r] = (t[r] + x) % MOD;
+			r--;
+		}
+		l /= 2;
+		r /= 2;
+	}
+}
+
+int get(int* t, int start, int i) {
+	i += start;
+	int cnt = 0;
+	while (i > 0) {
+		cnt = (t[i] + cnt) % MOD;
+		i /= 2;
+	}
+	return cnt;
+}
+
+int main() {
+	cin >> n >> m;
+	start1 = 1;
+	while (start1 < n) start1 <<= 1;
+	start2 = 1;
+	while (start2 < m) start2 <<= 1;
+	stack<query> data;
+	for (int i = 0; i < m; i++) {
+		cin >> q >> l >> r;
+		data.push({ q,l,r });
+	}
+	while (!data.empty()) {
+		query tmp = data.top();
+		data.pop();
+		if (tmp.q == 2) {
+			int x = get(t2, start2, data.size());
+			change(t2, start2, tmp.l - 1, tmp.r - 1, x);
+		}
+		else {
+			int x = get(t1, start1, data.size());
+			change(t1, start1, tmp.l - 1, tmp.r - 1, x);
+		}
+	}
+	for (int i = 0; i < n; i++) {
+		a[i] = get(t1, start1, i);
+		cout << a[i] << ' ';
+	}
+	cout << endl;
+}
