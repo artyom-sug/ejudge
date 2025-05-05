@@ -50,6 +50,9 @@ int main() {
 	while (start2 < m) start2 <<= 1;
 	stack<query> data;
 	for (int i = 0; i < m; i++) {
+		t2[i + start2] = 1;
+	}
+	for (int i = 0; i < m; i++) {
 		cin >> q >> l >> r;
 		data.push({ q,l,r });
 	}
@@ -61,7 +64,7 @@ int main() {
 			change(t2, start2, tmp.l - 1, tmp.r - 1, x);
 		}
 		else {
-			int x = get(t1, start1, data.size());
+			int x = get(t2, start2, data.size());
 			change(t1, start1, tmp.l - 1, tmp.r - 1, x);
 		}
 	}
