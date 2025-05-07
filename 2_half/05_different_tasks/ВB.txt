@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
+
+int n, a, b, c, x0;
+int sz = 0;
+
+struct node {
+    int val;
+    int min;
+} st[1000000];
+
+int pop() {
+    if (sz == 0) return 0; 
+    sz--;
+    return sz == 0 ? 0 : st[sz - 1].min;
+}
+
+int push(int x) {
+    int mn = (sz == 0) ? x : (x < st[sz - 1].min ? x : st[sz - 1].min);
+    st[sz].val = x;
+    st[sz].min = mn;
+    sz++;
+    return mn;
+}
+
+int main() {
+    long long sum = 0;
+    scanf("%d %d %d %d %d", &n, &a, &b, &c, &x0);
+    long long x = x0;
+    for (int i = 0; i < n; i++) {
+        x = ((1LL * a * x * x + b * x + c) / 100) % 1000000;
+        if (x % 5 < 2) {
+            sum += pop();
+        }
+        else {
+            sum += push(x);
+        }
+    }
+    printf("%lld\n", sum); 
+}
