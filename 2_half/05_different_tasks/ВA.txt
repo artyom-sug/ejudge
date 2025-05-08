@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+using llong = long long;
+
+int n, x, y;
+
+int main() {
+    cin >> n;
+    llong sumx = 0, sumy = 0, sumx_2 = 0, sumy_2 = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> x >> y;
+        sumx += x;
+        sumy += y;
+        sumx_2 += 1ll * x * x;
+        sumy_2 += 1ll * y * y;
+    }
+    cout << n * sumx_2 - sumx * sumx + n * sumy_2 - sumy * sumy << endl;
+}
