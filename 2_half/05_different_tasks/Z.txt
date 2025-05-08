@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+using llong = long long;
+
+int a[4][4]{
+    {1, 3, 14, 16},
+    {5, 12, 7, 10},
+    {13, 11, 4, 6},
+    {15, 8, 9, 2}
+};
+int x, y, k;
+
+int main() {
+    cin >> x >> y >> k;
+    x--; y--;
+    int px, py;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (a[i][j] == k) {
+                px = i;
+                py = j;
+            }
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        swap(a[x][i], a[px][i]);
+    }
+    for (int i = 0; i < 4; i++) {
+        swap(a[i][y], a[i][py]);
+    }
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            cout << a[i][j] << ' ';
+        }
+        cout << endl;
+    }
+}
