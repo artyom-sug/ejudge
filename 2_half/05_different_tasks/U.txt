@@ -1,0 +1,46 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <algorithm> 
+using namespace std;
+#define y1 y_1
+
+int x1, x2, x3, x4, y1, y2, y3, y4;
+double D, Dx, Dy;
+
+int main() {
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+    D = (x2 - x1) * (y4 - y3) - (y2 - y1) * (x4 - x3);
+    Dx = (x3 - x1) * (y4 - y3) - (y3 - y1) * (x4 - x3);
+    Dy = (x2 - x1) * (y3 - y1) - (y2 - y1) * (x3 - x1);
+    if (D != 0) {
+        double t = Dx / D;
+        double u = -Dy / D;
+        if (t >= 0 and t <= 1 and u >= 0 and u <= 1) {
+            double xres = x1 + t * (x2 - x1);
+            double yres = y1 + t * (y2 - y1);
+            bool first = (xres >= min(x1, x2) and (xres <= max(x1, x2))) and
+                (yres >= min(y1, y2) and (yres <= max(y1, y2)));
+            bool second = (xres >= min(x3, x4) and (xres <= max(x3, x4))) and
+                (yres >= min(y3, y4) and (yres <= max(y3, y4)));
+            if (first and second) {
+                cout << fixed << setprecision(9) << xres << " " << yres << endl;
+            }
+            else cout << "No\n";
+        }
+        else cout << "No\n";
+    }
+    else {
+        if (Dx == 0 and Dy == 0) {
+            bool fx = !(max(x1, x2) <= min(x3, x4) or max(x3, x4) <= min(x1, x2));
+            bool fy = !(max(y1, y2) <= min(y3, y4) or max(y3, y4) <= min(y1, y2));
+            if (fx and fy) cout << "Infinity\n";
+            else if (x1 == x3 and y1 == y3) cout << fixed << setprecision(9) << x1 * 1.0 << " " << y1 * 1.0 << endl;
+            else if (x2 == x3 and y2 == y3) cout << fixed << setprecision(9) << x2 * 1.0 << " " << y2 * 1.0 << endl;
+            else if (x1 == x4 and y1 == y4) cout << fixed << setprecision(9) << x1 * 1.0 << " " << y1 * 1.0 << endl;
+            else if (x2 == x4 and y2 == y4) cout << fixed << setprecision(9) << x2 * 1.0 << " " << y2 * 1.0 << endl;
+            else cout << "No\n";
+        }
+        else cout << "No\n";
+    }
+}
