@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+using llong = long long;
+
+struct state {
+	unordered_map<char, int> next;
+	int link = -1, len = 0;
+};
+
+class automat {
+	vector<state> st;
+	int last;
+
+public:
+	automat() : last(0) {
+		st.emplace_back();
+		st[0].len = 0;
+		st[0].link = -1;
+	}
+
+	void extend(char c) {
+		int p = last, cur = st.size();
+		st.emplace_back();
+		st[cur].len = st[p].len + 1;
+		while (p >= 0 and st[p].next.count(c) == 0) {
+			st[p].next[c] = cur;
+			p = st[p].link;
+		}
+		if (p == -1) st[cur].link = 0;
+		else {
+			int q = st[p].next[c];
+			if (st[p].len + 1 == st[q].len) st[cur].link = q;
+			else {
+				int clone = st.size();
+				st.push_back(st[q]);
+				st[clone].len = st[p].len + 1;
+				while (p >= 0 and st[p].next[c] == q) {
+					st[p].next[c] = clone;
+					p = st[p].link;
+				}
+				st[q].link = clone;
+				st[cur].link = clone;
+			}
+		}
+		last = cur;
+	}
+
+	llong count() {
+		llong res = 0;
+		for (size_t i = 1; i < st.size(); i++) {
+			res += st[i].len - st[st[i].link].len;
+		}
+		return res;
+	}
+};
+
+string s;
+
+int main() {
+	cin >> s;
+	automat a;
+	for (auto c : s) {
+		a.extend(c);
+	}
+	cout << a.count() << endl;
+}
