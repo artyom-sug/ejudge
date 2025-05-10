@@ -1,0 +1,60 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <unordered_set>
+using namespace std;
+
+vector<string> str;
+int k;
+
+pair<bool, string> find(int sz) {
+	if (sz == 0) return { true, "" };
+	unordered_set<string> subs;
+	string fs = str[0];
+	for (int i = 0; i + sz <= fs.size(); i++) {
+		subs.insert(fs.substr(i, sz));
+	}
+	for (int i = 1; i < k; i++) {
+		unordered_set<string> tmp;
+		string cur = str[i];
+		for (int j = 0; j + sz <= cur.size(); j++) {
+			string sub = cur.substr(j, sz);
+			if (subs.count(sub)) {
+				tmp.insert(sub);
+			}
+		}
+		if (tmp.empty()) return { false, "" };
+		subs = tmp;
+	}
+	return { true, *subs.begin() };
+}
+
+string bin_poisk() {
+	int l = 0, r = str[0].size();
+	for (auto s : str) {
+		if (s.size() < r) r = s.size();
+	}
+	string res = "";
+	while (l <= r) {
+		int m = (l + r) / 2;
+		pair<bool, string> fnd = find(m);
+		if (fnd.first) {
+			res = fnd.second;
+			l = m + 1;
+		}
+		else {
+			r = m - 1;
+		}
+	}
+	return res.empty() ? "none\n" : res + "\n";
+}
+
+int main() {
+	cin >> k;
+	str.resize(k);
+	for (int i = 0; i < k; i++) {
+		cin >> str[i];
+	}
+	cout << bin_poisk();
+}
