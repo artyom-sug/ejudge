@@ -1,0 +1,11 @@
+#!/bin/bash
+
+a=($(cat))
+res=()
+for i in "${!a[@]}"; do
+        if [[ "${a[i]^^}" =~ [A] ]];then
+                unset 'a[i]'
+        fi
+done
+a=("${a[@]}")
+echo "${a[@]}"
