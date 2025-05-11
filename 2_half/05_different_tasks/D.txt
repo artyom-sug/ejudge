@@ -1,0 +1,48 @@
+#include <fstream>
+using namespace std;
+
+int k, n, a[100];
+
+void long_mult(int* A, int k) {
+	int tmp = 0;
+	for (int i = 1; i <= A[0]; i++) {
+		int res = A[i] * k + tmp;
+		A[i] = res % 10000;
+		tmp = res / 10000;
+	}
+	while (tmp > 0) {
+		A[++A[0]] = tmp % 10000;
+		tmp /= 10000;
+	}
+}
+
+void to_long(int* A, int k) {
+	if (k == 0) {
+		A[0] = 1;
+		A[1] = 0;
+		return;
+	}
+	A[0] = 0;
+	while (k > 0) {
+		A[++A[0]] = k % 10000;
+		k /= 10000;
+	}
+}
+
+int main() {
+	ifstream cin("paint.dat");
+	ofstream cout("paint.sol");
+	cin >> k >> n;
+	int fac = k * (k - 1) * (k - 2) * (k - 3);
+	to_long(a, fac);
+	for (int i = 1; i < n; i++) {
+		long_mult(a, fac - 1);
+	}
+	for (int i = a[0]; i > 0; i--) {
+		if (a[i] < 10 and i != a[0]) cout << "000" << a[i];
+		else if (a[i] < 100 and i != a[0]) cout << "00" << a[i];
+		else if (a[i] < 1000 and i != a[0]) cout << "0" << a[i];
+		else cout << a[i];
+	}
+	cout << endl;
+}
