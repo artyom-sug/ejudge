@@ -1,0 +1,23 @@
+#include <iostream>
+#include <string>
+#include <unordered_set>
+using namespace std;
+
+string s;
+
+int main() {
+	cin >> s;
+	for (int i = s.size() - 1; i > 0; i--) {
+		unordered_set<string> cnt;
+		string tmp = "";
+		for (int j = 0; j <= s.size() - i; j++) {
+			tmp = s.substr(j, i);
+			if (cnt.find(tmp) != cnt.end()) {
+				cout << tmp.size() << endl;
+				return 0;
+			}
+			cnt.insert(tmp);
+		}
+	}
+	cout << "0\n";
+}
