@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+using llong = long long;
+
+int n;
+
+llong merge(vector<int>& a, vector<int>& tmp, int l, int m, int r) {
+	int i = l, j = m + 1, k = l;
+	llong cnt = 0;
+	while (i <= m and j <= r) {
+		if (a[i] <= a[j]) {
+			tmp[k++] = a[i++];
+		}
+		else {
+			tmp[k++] = a[j++];
+			cnt += (m - i + 1);
+		}
+	}
+	while (i <= m) tmp[k++] = a[i++];
+	while (j <= r) tmp[k++] = a[j++];
+	for (i = l; i <= r; i++) a[i] = tmp[i];
+	return cnt;
+}
+
+llong count(vector<int>& a, vector<int>& tmp, int l, int r) {
+	llong cnt = 0;
+	if (l < r) {
+		int m = l + (r - l) / 2;
+		cnt += count(a, tmp, l, m);
+		cnt += count(a, tmp, m + 1, r);
+		cnt += merge(a, tmp, l, m, r);
+	}
+	return cnt;
+}
+
+int main() {
+	cin >> n;
+	vector<int> a(n);
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+	vector<int> tmp(a.size());
+	cout << count(a, tmp, 0, a.size() - 1) << endl;
+}
