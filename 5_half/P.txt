@@ -1,0 +1,7 @@
+#!/bin/bash
+
+a=($(cat))
+for i in "${!a[@]}"; do
+        a[i]=${a[i]/[A-Z]/.}
+done
+echo "${a[@]}"
