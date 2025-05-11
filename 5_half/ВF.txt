@@ -1,0 +1,13 @@
+#!/bin/bash
+
+read n
+read -a arr
+declare -A count
+max=1
+for num in "${arr[@]}"; do
+    ((count[$num]++))
+    if (( count[$num] > max )); then
+        max=${count[$num]}
+    fi
+done
+echo $max
