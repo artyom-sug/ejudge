@@ -1,0 +1,9 @@
+#!/bin/bash
+
+a=($(cat))
+for word in "${a[@]}"; do
+        revers=$(echo "$word" | rev)
+        if [[ "$word" == "$revers" ]]; then
+                echo "$word"
+        fi
+done
