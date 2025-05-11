@@ -1,0 +1,9 @@
+#!/bin/bash
+
+read n
+read -a a
+res=0
+for num in "${a[@]}"; do
+        res=$((res ^ num))
+done
+echo "$res"
