@@ -1,0 +1,50 @@
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+string s;
+int dp[300][300];
+
+string palin(const string& s) {
+	int sz = s.size();
+	for (int i = 0; i < sz; i++) {
+		dp[i][i] = 1;
+	}
+	for (int l = 2; l <= sz; l++) {
+		for (int i = 0; i <= sz - l; i++) {
+			int j = l + i - 1;
+			if (s[i] == s[j]) {
+				dp[i][j] = l == 2 ? 2 : dp[i + 1][j - 1] + 2;
+			}
+			else {
+				dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
+			}
+		}
+	}
+	int sl = dp[0][sz - 1];
+	string pal;
+	pal.reserve(sl);
+	int i = 0, j = sz - 1;
+	while (i <= j) {
+		if (s[i] == s[j]) {
+			pal += s[i];
+			i++; j--;
+		}
+		else if (dp[i + 1][j] > dp[i][j - 1]) i++;
+		else j--;
+	}
+	string tmp = pal.substr(0, pal.size() - (sl % 2 ? 1 : 0));
+	reverse(tmp.begin(), tmp.end());
+	pal += tmp;
+	return pal;
+}
+
+int main() {
+	ifstream cin("palin.dat");
+	ofstream cout("palin.sol");
+	cin >> s;
+	string tmp = palin(s);
+	cout << s.size() - tmp.size() << endl << tmp << endl;
+}
