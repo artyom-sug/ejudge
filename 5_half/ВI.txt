@@ -1,0 +1,14 @@
+#!/bin/bash
+
+read -r n
+digits=($(echo "$n" | grep -o .))
+sorted=($(printf "%s\n" "${digits[@]}" | sort -n))
+len=${#sorted[@]}
+mid=$(( (len - 1) / 2 ))
+m=${sorted[$mid]}
+result=$(echo "$n" | sed "s/$m//g")
+if [[ -z "$result" ]]; then
+    result="NULL"
+fi
+echo "$m"
+echo "$result"
