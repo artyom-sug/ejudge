@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read n m
+a=($(cat))
+echo "${a[@]:n:m-n+1}"
