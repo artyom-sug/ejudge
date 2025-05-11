@@ -1,0 +1,12 @@
+#!/bin/bash
+
+read n
+for ((i=0; i<n; i++)); do
+    read -r username
+    if [[ "$username" =~ ^[_\.][0-9]+[a-zA-Z]*_?$ ]] &&
+       ! [[ "$username" =~ ^[_\.][0-9]+[a-zA-Z]+[^_a-zA-Z]$ ]]; then
+        echo "VALID"
+    else
+        echo "INVALID"
+    fi
+done
