@@ -1,0 +1,9 @@
+#!/bin/bash
+
+read t
+for((i = 0; i < t; i++))
+do
+        read n
+        res=$(seq -s '*' 1 $n | BC_LINE_LENGTH=0 bc)
+        printf "%s\n" $res
+done
