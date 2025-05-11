@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read val
+res=$(echo "scale = 3; $val" | bc)
+echo $res
