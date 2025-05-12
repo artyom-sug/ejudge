@@ -1,0 +1,11 @@
+#!/bin/bash
+
+read n
+for ((i = 0; i < n; i++)); do
+    read -r email
+    if [[ "$email" =~ ^[a-zA-Z0-9][a-zA-Z0-9_.-]*[a-zA-Z0-9]@[a-zA-Z0-9.]+\.[a-zA-Z]{2,4}$ ]]; then
+        echo "YES"
+    else
+        echo "NO"
+    fi
+done
