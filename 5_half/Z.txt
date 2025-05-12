@@ -1,0 +1,21 @@
+#!/bin/bash
+
+read n
+res=""
+for ((t = 0; t < n; t++)); do
+    read s
+    s=$(echo "$s" | sed 's/< */</g')
+    s=$(echo "$s" | grep -Eo '<[^/> ]+')
+    s=$(echo "$s" | sed 's/<//g; s/ .*//')
+    res="$res $s"
+done
+unique_tags=()
+for tag in $res; do
+    if [[ ! " ${unique_tags[@]} " =~ " $tag " ]]; then
+        unique_tags+=("$tag")
+    fi
+done
+IFS=$'\n' sorted=($(sort <<<"${unique_tags[*]}"))
+unset IFS
+ans=$(IFS=';'; echo "${sorted[*]}")
+echo "$ans"
