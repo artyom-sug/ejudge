@@ -1,0 +1,17 @@
+#!/bin/bash
+
+read t
+for ((i=0; i<t; i++)); do
+    read n
+    read -a arr
+
+    half=$((n/2))
+    if (( n % 2 == 0 )); then
+        printf "%s\n" "${arr[@]:0:half}" | sort -n
+        printf "%s\n" "${arr[@]:half}" | sort -nr
+    else
+        printf "%s\n" "${arr[@]:0:half}" | sort -n
+        echo "${arr[half]}"
+        printf "%s\n" "${arr[@]:half+1}" | sort -nr
+    fi
+done
