@@ -3,7 +3,7 @@
 #include <iomanip>
 using namespace std;
 
-int	a, b, n;
+int a, b, n;
 
 int main() {
 	cin >> n;
