@@ -1,24 +1,25 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+#define pb push_back
 
-int n, adj[200001];
-vector<int> ans;
+int n, graph[200001];
+vector<int> res;
 
 int main() {
 	cin >> n;
-	adj[1] = 0;
+	graph[1] = 0;
 	for (int i = 1; i < n; i++) {
-		cin >> adj[i + 1];
+		cin >> graph[i + 1];
 	}
 	int j = n;
-	while (adj[j] != 0) {
-		ans.push_back(j);
-		j = adj[j];
+	while (graph[j] != 0) {
+		res.pb(j);
+		j = graph[j];
 	}
 	cout << '1';
-	for (int i = ans.size() - 1; i >= 0; i--) {
-		cout << ' ' << ans[i];
+	for (int i = res.size() - 1; i >= 0; i--) {
+		cout << ' ' << res[i];
 	}
 	cout << endl;
 }
