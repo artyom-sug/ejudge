@@ -1,0 +1,84 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int n;
+
+inline void copyMatrix(int A[30][30], int B[30][30], int& size);
+
+inline void sumMatrix(int A[30][30], int B[30][30], int& size);
+
+inline void examMatrix(int A[30][30], int B[30][30], int& size);
+
+int main() {
+	int matrix[30][30]{ 0 };
+	int res[30][30]{ 0 };
+	int occur[30][30]{ 0 };
+	cin >> n;
+	int maxv = 0;
+	for (int i = 0, j, k; i < n; i++) {
+		cin >> j >> k;
+		matrix[j][k] = 1;
+		maxv = max({ j, k, maxv });
+	}
+	maxv++;
+	copyMatrix(res, matrix, maxv);
+	copyMatrix(occur, matrix, maxv);
+	for (int degree = 0; degree < maxv; degree++) {
+		int tmp[30][30]{ 0 };
+		for (int i = 0; i < maxv; i++) {
+			for (int j = 0; j < maxv; j++) {
+				for (int k = 0; k < maxv; k++) {
+					tmp[i][j] += matrix[i][k] * occur[k][j];
+				}
+			}
+		}
+		copyMatrix(matrix, tmp, maxv);
+		sumMatrix(res, matrix, maxv);
+	}
+	int cycle[30][30]{ 0 };
+	copyMatrix(cycle, res, maxv);
+	for (int degree = 0; degree < maxv; degree++) {
+		int tmp[30][30]{ 0 };
+		for (int i = 0; i < maxv; i++) {
+			for (int j = 0; j < maxv; j++) {
+				for (int k = 0; k < maxv; k++) {
+					tmp[i][j] += matrix[i][k] * occur[k][j];
+				}
+			}
+		}
+		copyMatrix(matrix, tmp, maxv);
+		sumMatrix(cycle, matrix, maxv);
+	}
+	examMatrix(res, cycle, maxv);
+	for (int i = 0; i < maxv; i++) {
+		for (int j = 0; j < maxv; j++) {
+			cout << res[i][j] << ' ';
+		}
+		cout << endl;
+	}
+}
+
+inline void copyMatrix(int A[30][30], int B[30][30], int& size) {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			A[i][j] = B[i][j];
+		}
+	}
+}
+
+inline void sumMatrix(int A[30][30], int B[30][30], int& size) {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			A[i][j] += B[i][j];
+		}
+	}
+}
+
+inline void examMatrix(int A[30][30], int B[30][30], int& size) {
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			A[i][j] = B[i][j] == A[i][j] ? A[i][j] : -1;
+		}
+	}
+}
