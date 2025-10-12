@@ -1,0 +1,62 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+#define pb push_back
+
+int n, m;
+vector<int> res;
+vector<vector<int>> graph;
+vector<int>	color;
+bool cycle = 0;
+
+enum COLOR {
+	WHITE,
+	GRAY,
+	BLACK
+};
+
+void top_sort();
+
+void dfs(int v);
+
+int main() {
+	cin >> n >> m;
+	graph.resize(n + 1);
+	color.resize(n + 1);
+	for (int i = 0; i < n + 1; i++) color[i] = WHITE;
+	for (int i = 0, x, y; i < m; i++) {
+		cin >> x >> y;
+		graph[x].pb(y);
+	}
+	top_sort();
+	if (cycle) cout << "-1\n";
+	else {
+		for (int a : res) {
+			cout << a << ' ';
+		}
+		cout << "\n";
+	}
+} 
+
+void top_sort() {
+	for (int i = 1; i < n + 1; i++) {
+		if (color[i] == WHITE) dfs(i);
+	}
+	reverse(res.begin(), res.end());
+}
+
+void dfs(int v) {
+	if (cycle) return;
+	color[v] = GRAY;
+	for (int i = 0; i < graph[v].size(); i++) {
+		int to = graph[v][i];
+		if (color[to] == WHITE) dfs(to);
+		else if (color[to] == GRAY) {
+			cycle = 1;
+			return;
+		}
+	}
+	color[v] = BLACK;
+	res.pb(v);
+}
